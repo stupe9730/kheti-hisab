@@ -42,22 +42,24 @@ async function startServer() {
     "http://localhost:5173",
     "https://kheti-hisab.vercel.app",
   ];
+
   app.use(
     cors({
       origin: function (origin, callback) {
+        // लोकल टेस्ट किंवा मोबाईलसाठी ओरिजिन नसेल तर परवानगी द्या
         if (!origin) return callback(null, true);
 
         if (allowedOrigins.indexOf(origin) !== -1) {
           return callback(null, true);
         } else {
-          return callback(
-            new Error("CORS नियम: या वेबसाईटला डेटा मिळवण्याची परवानगी नाही!"),
-            false,
-          );
+          // ❌ 'new Error' पाठवू नका, त्यामुळे सर्व्हर रिस्पॉन्स न देताच ब्लॉक होतो
+          // ✅ फक्त false पाठवा
+          return callback(null, false);
         }
       },
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ज्या मेथड्स चालू ठेवायच्या आहेत
-      allowedHeaders: ["Content-Type", "Authorization"], // टोकन पाठवण्यासाठी लागणारे हेडर्स
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+      optionsSuccessStatus: 204, // 👈 हे अत्यंत महत्त्वाचे आहे, यानेच प्रीफ्लाईट एरर निघून जाईल!
     }),
   );
   app.use(express.json());
