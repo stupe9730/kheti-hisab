@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-secondary: var(--secondary-card);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-primary: var(--primary);
+}
+
+@layer base {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --secondary-card: #f1f5f9;
+    --border: #f1f5f9;
+    --muted: #64748b;
+    --muted-foreground: #94a3b8;
+    --accent: #2563eb;
+    --accent-foreground: #ffffff;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --primary: #16a34a;
+  }
+
+  .dark {
+    --background: #0f1115;
+    --foreground: #ffffff;
+    --card: #1a1f29;
+    --card-foreground: #ffffff;
+    --secondary-card: #232937;
+    --border: #2f3747;
+    --muted: #b8c0cc;
+    --muted-foreground: #8892a6;
+    --accent: #4f8cff;
+    --accent-foreground: #ffffff;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --primary: #4f8cff;
+  }
+
+  body {
+    @apply antialiased text-foreground bg-background transition-colors duration-500 overflow-x-hidden;
+    -webkit-tap-highlight-color: transparent;
+    width: 100%;
+  }
+
+  #root {
+    @apply overflow-x-hidden w-full;
+  }
+
+  * {
+    @apply transition-colors duration-300;
+    box-sizing: border-box;
+  }
+}
+
+@utility glow-primary {
+  box-shadow: 0 0 20px -5px var(--primary);
+}
+
+@utility glow-success {
+  box-shadow: 0 0 20px -5px var(--success);
+}
+
+@utility glow-error {
+  box-shadow: 0 0 20px -5px var(--error);
+}
+
+@utility glass-effect {
+  @apply backdrop-blur-md bg-card/60 border border-white/5;
+}
+
+@utility premium-card {
+  @apply bg-card border border-border shadow-2xl shadow-black/20 hover:border-primary/30 transition-all duration-500;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

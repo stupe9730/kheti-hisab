@@ -1,0 +1,6 @@
+{
+  "name": "Remix: Kheti Hisab",
+  "description": "A simple farm expense management app to track tractor, fertilizer, seeds, and pesticide costs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
