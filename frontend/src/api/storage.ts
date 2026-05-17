@@ -12,10 +12,10 @@ import {
   OtherExpense,
 } from "../types";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const api = axios.create({
-  baseURL: `${API_BASE_URL}/api`,
+  baseURL: `${BACKEND_URL}/api`,
 });
 
 const normalize = (data: any): any => {

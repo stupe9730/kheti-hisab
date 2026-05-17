@@ -38,13 +38,28 @@ async function startServer() {
   await connectDB();
 
   // Middleware
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "https://kheti-hisab.vercel.app",
+  ];
   app.use(
     cors({
-      origin: true,
-      credentials: true,
+      origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1) {
+          return callback(null, true);
+        } else {
+          return callback(
+            new Error("CORS नियम: या वेबसाईटला डेटा मिळवण्याची परवानगी नाही!"),
+            false,
+          );
+        }
+      },
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ज्या मेथड्स चालू ठेवायच्या आहेत
+      allowedHeaders: ["Content-Type", "Authorization"], // टोकन पाठवण्यासाठी लागणारे हेडर्स
     }),
   );
-
   app.use(express.json());
 
   // Database Connection Check
